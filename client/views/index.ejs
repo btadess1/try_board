@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="./../static/style.css">
+		<script type="text/javascript">
+			
+		</script>
+	</head>
+
+	<body>
+	<h1>Welcome to the Message Board of UMUC</h1>
+		<form action="/post/message" method="POST">
+			Name: <input type="text" name="name"><br><br>
+			Message: <input type="text" name="message"><br><br>
+			<input type="submit" value="Post Message"><br><br>
+		</form><br>
+		<% for(var x in post){ %>
+			<h3><%= post[x].name %></h3>
+			<h3><%= post[x].text %></h3>
+			
+			<% for(let i = 0; i < post[x].comments.length; i++){ %>
+				<h4><%= post[x].comments[i].name %></h4>
+				<h4><%= post[x].comments[i].text %></h4>
+			<% } %>
+			<form action="/post/comment/<%= post[x]._id %>" method="POST">
+				Name: <input type="text" name="name"><br><br>
+				comment: <input type="text" name="comment"><br><br>
+				<input type="submit" value="Post Comment"><br>
+			</form><br>
+		<% } %>
+	</body>
+</html>
